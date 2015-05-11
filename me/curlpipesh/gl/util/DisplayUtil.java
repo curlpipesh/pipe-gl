@@ -28,8 +28,8 @@ public final class DisplayUtil {
         try {
             Display.setDisplayMode(new DisplayMode(width, height));
             Display.create(pixelFormat, sharedDrawable, attribs);
+            GL11.glViewport(0, 0, width, height);
         } catch (LWJGLException e) {
-            //e.printStackTrace();
             throw new IllegalStateException(e);
         }
     }

@@ -1,20 +1,21 @@
 package me.curlpipesh.gl.util;
 
+import org.lwjgl.BufferUtils;
+
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 public interface BufferUtil {
-    public default ByteBuffer getByteBuffer(int capacity) {
-        return ByteBuffer.allocateDirect(capacity).order(ByteOrder.nativeOrder());
+    default ByteBuffer getByteBuffer(int capacity) {
+        return BufferUtils.createByteBuffer(capacity);
     }
 
-    public default IntBuffer getIntBuffer(int capacity) {
-        return getByteBuffer(capacity).asIntBuffer();
+    default IntBuffer getIntBuffer(int capacity) {
+        return BufferUtils.createIntBuffer(capacity);
     }
 
-    public default FloatBuffer getFloatBuffer(int capacity) {
-        return getByteBuffer(capacity).asFloatBuffer();
+    default FloatBuffer getFloatBuffer(int capacity) {
+        return BufferUtils.createFloatBuffer(capacity);
     }
 }

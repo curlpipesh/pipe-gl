@@ -14,19 +14,6 @@ public class VAOTest {
     }
 
     public void start() {
-        /*try {
-            Display.setDisplayMode(new DisplayMode(800, 600));
-            Display.create();
-        } catch (LWJGLException e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
-        // init OpenGL here
-        GL11.glMatrixMode(GL11.GL_PROJECTION);
-        GL11.glLoadIdentity();
-        GL11.glOrtho(0, 800, 0, 600, 1, -1);
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
-        GL11.glClearColor(0, 0, 0, 1);*/
         DisplayUtil.buildDisplay(800, 600);
         DisplayUtil.basicOpenGLInit();
 
@@ -40,6 +27,7 @@ public class VAOTest {
                     .addVertex(110, 110, 0)
                     .addVertex(10, 110, 0)
                     .bindAndDraw();
+            Display.sync(60);
             Display.update();
             int error;
             if((error = GL11.glGetError()) != GL11.GL_NO_ERROR) {
