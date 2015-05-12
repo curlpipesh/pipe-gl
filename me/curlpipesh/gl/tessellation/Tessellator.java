@@ -41,6 +41,17 @@ public interface Tessellator extends BufferUtil {
     Tessellator addVertex(float x, float y, float z);
 
     /**
+     * Adds a vertex at the given x-, y-, and z-coordinates. Intended to just
+     * typecast to float.
+     *
+     * @param x The x coordinate
+     * @param y The y coordinate
+     * @param z The z coordinate
+     * @return Itself
+     */
+    Tessellator addVertex(double x, double y, double z);
+
+    /**
      * Sets the U- and V-coordinates for the current vertex
      *
      * @param u U-coordinate

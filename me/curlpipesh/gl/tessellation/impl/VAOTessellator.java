@@ -81,6 +81,11 @@ public class VAOTessellator implements Tessellator {
     }
 
     @Override
+    public Tessellator addVertex(double x, double y, double z) {
+        return addVertex((float)x, (float)y, (float)z);
+    }
+
+    @Override
     public Tessellator addUV(float u, float v) {
         isTextured = true;
         this.u = u;
