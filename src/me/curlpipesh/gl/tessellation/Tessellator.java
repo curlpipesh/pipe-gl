@@ -59,7 +59,7 @@ public interface Tessellator extends BufferUtil {
      *
      * @return Itself
      */
-    Tessellator addUV(float u, float v);
+    Tessellator addUV(double u, double v);
 
     /**
      * Adds a vertex with the given x-, y-, and z-coordinates with the given
@@ -72,7 +72,7 @@ public interface Tessellator extends BufferUtil {
      * @param v V-coordinate
      * @return Itself
      */
-    Tessellator addVertexWithUV(float x, float y, float z, int u, int v);
+    Tessellator addVertexWithUV(double x, double y, double z, double u, double v);
 
     /**
      * Binds the Tessellator, setting up the various GL calls

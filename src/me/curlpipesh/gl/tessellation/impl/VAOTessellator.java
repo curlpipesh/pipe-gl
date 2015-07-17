@@ -15,8 +15,8 @@ public class VAOTessellator implements Tessellator {
     private boolean isColored = false;
     private boolean isTextured = false;
     private int color = 0;
-    private float u = 0;
-    private float v = 0;
+    private double u = 0;
+    private double v = 0;
     private int index = 0;
     private int drawMode = -1;
 
@@ -56,8 +56,8 @@ public class VAOTessellator implements Tessellator {
 
     /**
      * Converts colors from 0xAARRGGBB format to 0xAABBGGRR format
-     * @param color
-     * @return
+     * @param color Color to restitch
+     * @return Restitched color
      */
     private int restitchColor(int color) {
         int a = (color >> 24) & 255;
@@ -74,8 +74,8 @@ public class VAOTessellator implements Tessellator {
         raw[index2+1] = Float.floatToRawIntBits(y);
         raw[index2+2] = Float.floatToRawIntBits(z);
         raw[index2+3] = this.color;
-        raw[index2+4] = Float.floatToRawIntBits(this.u);
-        raw[index2+5] = Float.floatToRawIntBits(this.v);
+        raw[index2+4] = Float.floatToRawIntBits((float)this.u);
+        raw[index2+5] = Float.floatToRawIntBits((float)this.v);
         ++index;
         return this;
     }
@@ -86,7 +86,7 @@ public class VAOTessellator implements Tessellator {
     }
 
     @Override
-    public Tessellator addUV(float u, float v) {
+    public Tessellator addUV(double u, double v) {
         isTextured = true;
         this.u = u;
         this.v = v;
@@ -94,7 +94,7 @@ public class VAOTessellator implements Tessellator {
     }
 
     @Override
-    public Tessellator addVertexWithUV(float x, float y, float z, int u, int v) {
+    public Tessellator addVertexWithUV(double x, double y, double z, double u, double v) {
         addUV(u, v);
         addVertex(x, y, z);
         return this;
