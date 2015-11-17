@@ -23,6 +23,15 @@ public class Vbo implements BufferUtil {
         this.mode = mode;
     }
 
+    /*
+     * Assumes that a correctly-formed point list was passed in.
+     */
+    public Vbo(int mode, List<Float> points) {
+        this.id = glGenBuffers();
+        this.mode = mode;
+        this.points.addAll(points);
+    }
+
     public Vbo vertex(float x, float y, float z) {
         compiled = false;
         points.add(x);
@@ -60,7 +69,7 @@ public class Vbo implements BufferUtil {
 
     public void render() {
         if(!compiled) {
-            throw new IllegalStateException("VBO is not compiled!");
+            throw new IllegalStateException("VBO " + id + " is not compiled!");
         }
 
         glBindBuffer(GL_ARRAY_BUFFER, id);
