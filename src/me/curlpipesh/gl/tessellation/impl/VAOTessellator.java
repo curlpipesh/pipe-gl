@@ -36,12 +36,11 @@ public class VAOTessellator implements Tessellator {
     @Override
     public Tessellator startDrawing(int mode) {
         if(isDrawing && drawMode != -1) {
-            System.out.println(String.format("Current drawMode:  %s", drawMode));
-            System.out.println(String.format("Current isDrawing: %s", isDrawing));
+            System.err.println(String.format("Current drawMode:  %s", drawMode));
+            System.err.println(String.format("Current isDrawing: %s", isDrawing));
             throw new IllegalStateException("Already drawing!");
         }
         isDrawing = true;
-        GL11.glEnableClientState(GL11.GL_COLOR_ARRAY);
         GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
         drawMode = mode;
         return this;
@@ -49,6 +48,9 @@ public class VAOTessellator implements Tessellator {
 
     @Override
     public Tessellator color(int color) {
+        if(!isColored) {
+            GL11.glEnableClientState(GL11.GL_COLOR_ARRAY);
+        }
         isColored = true;
         this.color = restitchColor(color);
         return this;
@@ -87,6 +89,9 @@ public class VAOTessellator implements Tessellator {
 
     @Override
     public Tessellator addUV(double u, double v) {
+        if(!isTextured) {
+            GL11.glEnableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
+        }
         isTextured = true;
         this.u = u;
         this.v = v;
@@ -126,8 +131,13 @@ public class VAOTessellator implements Tessellator {
         }
         isDrawing = false;
         GL11.glDrawArrays(drawMode, 0, index);
+        if(isTextured) {
+            GL11.glDisableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
+        }
+        if(isColored) {
+            GL11.glDisableClientState(GL11.GL_COLOR_ARRAY);
+        }
         GL11.glDisableClientState(GL11.GL_VERTEX_ARRAY);
-        GL11.glDisableClientState(GL11.GL_COLOR_ARRAY);
         return this;
     }
 
